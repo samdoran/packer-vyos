@@ -1,0 +1,74 @@
+{
+  "builders": [
+    {
+      "type": "virtualbox-iso",
+      "boot_wait": "5s",
+      "boot_command": [
+        "<enter><wait10><wait10>",
+        "vyos<enter><wait>",
+        "vyos<enter><wait>",
+        "install system<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "<enter><wait>",
+        "Yes<enter><wait>",
+        "<enter><wait10><wait10><wait10><wait10>",
+        "<enter><wait>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "<enter><wait5>",
+        "reboot<enter><wait>",
+        "Yes<enter><wait10><wait10><wait10><wait10>",
+        "vyos<enter><wait>",
+        "vagrant<enter><wait>",
+        "configure<enter><wait>",
+        "set interfaces ethernet eth0 address dhcp<enter><wait>",
+        "set system login user vagrant authentication plaintext-password vagrant<enter><wait>",
+        "set system login user vagrant level admin<enter><wait>",
+        "set service ssh<enter><wait>",
+        "commit<enter><wait>",
+        "save<enter><wait>",
+        "exit<enter><wait>",
+        "exit<enter><wait5>",
+        "vagrant<enter><wait>",
+        "vagrant<enter><wait>",
+        "configure<enter><wait>",
+        "delete system login user vyos<enter><wait>",
+        "commit<enter><wait>",
+        "save<enter><wait>",
+        "exit<enter><wait>"
+      ],
+      "disk_size": 2048,
+      "guest_os_type": "Debian_64",
+      "headless": false,
+      "iso_url": "iso/vyos-1.1.7-amd64.iso",
+      "iso_checksum": "1e81aa85bb070e9fbf9b02ad7e649ef51d9690a4126ca92b2c1a8d2ef1fbf8b0",
+      "iso_checksum_type": "sha256",
+      "ssh_username": "vagrant",
+      "ssh_password": "vagrant",
+      "shutdown_command": "sudo poweroff",
+      "output_directory": "boxes",
+      "vm_name": "packer-vyos-amd64",
+      "vboxmanage": [
+        [ "modifyvm", "{{ .Name }}", "--memory", "512" ],
+        [ "modifyvm", "{{ .Name }}", "--cpus", "1" ]
+      ]
+    }
+  ],
+  "provisioners": [
+    {
+      "type": "shell",
+      "scripts": [
+        "scripts/configure.sh",
+        "scripts/vbox_guest_additions.sh",
+        "scripts/cleanup.sh"
+      ]
+    }
+  ],
+  "post-processors": [
+    {
+      "output": "builds/{{ .Provider }}-vyos.box",
+      "type": "vagrant"
+    }
+  ]
+}
