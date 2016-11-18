@@ -58,8 +58,12 @@
   "provisioners": [
     {
       "type": "shell",
+      "script": "scripts/configure.sh"
+    },
+    {
+      "type": "shell",
+      "execute_command": "echo 'vagrant' | {{ .Vars }} sudo -E -S bash -c '{{ .Path }}'",
       "scripts": [
-        "scripts/configure.sh",
         "scripts/vbox_guest_additions.sh",
         "scripts/cleanup.sh"
       ]
