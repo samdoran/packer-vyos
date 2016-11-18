@@ -40,7 +40,7 @@
       ],
       "disk_size": 2048,
       "guest_os_type": "Debian_64",
-      "headless": false,
+      "headless": true,
       "iso_url": "iso/vyos-1.1.7-amd64.iso",
       "iso_checksum": "1e81aa85bb070e9fbf9b02ad7e649ef51d9690a4126ca92b2c1a8d2ef1fbf8b0",
       "iso_checksum_type": "sha256",
