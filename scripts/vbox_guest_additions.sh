@@ -5,7 +5,14 @@ apt-get update
 aptitude -y install build-essential
 aptitude -y install bzip2
 aptitude -y install dkms
-aptitude -y install linux-vyatta-kbuild
+
+# The repository structure was changed in March 2017 and the linux-vyatta-build
+# package points to a URL that is no longer valid
+# As a workaround, manually download and install the file
+
+# aptitude -y install linux-vyatta-kbuild
+wget -P /tmp http://dev.packages.vyos.net/legacy/repos/vyos/pool/main/l/linux-3.13/linux-vyatta-kbuild_3.13.11-1+vyos1+helium11_amd64.deb
+dpkg -i /tmp/linux-vyatta-kbuild_3.13.11-1+vyos1+helium11_amd64.deb
 
 ln -s /usr/src/linux-image/debian/build/build-amd64-none-amd64-vyos "/lib/modules/$(uname -r)/build"
 

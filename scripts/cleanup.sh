@@ -8,6 +8,7 @@ sed -i -e 's,^.*:/sbin/getty\s\+.*\s\+tty[2-6],#\0,' /etc/inittab
 
 # Clean apt cache
 aptitude -y clean
+rm -f /tmp/linux-vyatta-kbuild_3.13.11-1+vyos1+helium11_amd64.deb
 
 # Zero out the rest of the free space using dd, then delete the written file.
 echo "Reclaming free space on disk"
