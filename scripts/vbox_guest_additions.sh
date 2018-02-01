@@ -11,8 +11,8 @@ aptitude -y install dkms
 # As a workaround, manually download and install the file
 
 # aptitude -y install linux-vyatta-kbuild
-wget -P /tmp http://dev.packages.vyos.net/legacy/repos/vyos/pool/main/l/linux-3.13/linux-vyatta-kbuild_3.13.11-1+vyos1+helium11_amd64.deb
-dpkg -i /tmp/linux-vyatta-kbuild_3.13.11-1+vyos1+helium11_amd64.deb
+wget -P /tmp http://dev.packages.vyos.net/repositories/legacy/vyos/pool/main/l/linux-3.13/linux-vyatta-kbuild_3.13.11-1+vyos1+helium14_amd64.deb
+dpkg -i /tmp/linux-vyatta-kbuild_3.13.11-1+vyos1+helium14_amd64.deb
 
 ln -s /usr/src/linux-image/debian/build/build-amd64-none-amd64-vyos "/lib/modules/$(uname -r)/build"
 
