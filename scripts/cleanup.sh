@@ -3,7 +3,7 @@
 # Fix slow DNS
 sed -i 's/UseDNS.*$/UseDNS no/' /etc/ssh/sshd_config
 
-# Disable TTYs in run levers 2-6
+# Disable TTYs in run levels 2-6
 sed -i -e 's,^.*:/sbin/getty\s\+.*\s\+tty[2-6],#\0,' /etc/inittab
 
 # Clean apt cache
