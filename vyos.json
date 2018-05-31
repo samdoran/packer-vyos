@@ -1,4 +1,8 @@
 {
+  "variables": {
+    "version": "",
+    "version_description": ""
+  },
   "builders": [
     {
       "type": "virtualbox-iso",
@@ -18,7 +22,7 @@
         "vagrant<enter><wait>",
         "<enter><wait5>",
         "reboot<enter><wait>",
-        "Yes<enter><wait10><wait10><wait10><wait10>",
+        "Yes<enter><wait10><wait10><wait10><wait10><wait10><wait5>",
         "vyos<enter><wait>",
         "vagrant<enter><wait>",
         "configure<enter><wait>",
@@ -26,6 +30,7 @@
         "set system login user vagrant authentication plaintext-password vagrant<enter><wait>",
         "set system login user vagrant level admin<enter><wait>",
         "set service ssh<enter><wait>",
+        "delete system console<enter><wait>",
         "commit<enter><wait>",
         "save<enter><wait>",
         "exit<enter><wait>",
@@ -71,9 +76,17 @@
     }
   ],
   "post-processors": [
-    {
-      "output": "builds/{{ .Provider }}-vyos.box",
-      "type": "vagrant"
-    }
+    [
+      {
+        "output": "builds/{{ .Provider }}-vyos.box",
+        "type": "vagrant"
+      },
+      {
+        "type": "vagrant-cloud",
+        "box_tag": "samdoran/vyos",
+        "version": "{{ user `version` }}",
+        "version_description": "{{ user `version_description` }}"
+      }
+    ]
   ]
 }
