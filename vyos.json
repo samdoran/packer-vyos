@@ -1,7 +1,8 @@
 {
   "variables": {
-    "version": "",
-    "version_description": ""
+    "vagrant_cloud_token": "{{ env `VAGRANT_CLOUD_TOKEN` }}",
+    "version": "{{ env `VAGRANT_BOX_VERSION` }}",
+    "version_description": "{{ env `VAGRANT_BOX_DESCRIPTION` }}"
   },
   "builders": [
     {
@@ -84,6 +85,7 @@
       {
         "type": "vagrant-cloud",
         "box_tag": "samdoran/vyos",
+        "access_token": "{{ user `vagrant_cloud_token` }}",
         "version": "{{ user `version` }}",
         "version_description": "{{ user `version_description` }}"
       }
